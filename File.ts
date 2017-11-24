@@ -90,7 +90,9 @@ export class File extends AbstractController {
         }
         else{
           this.sendResponse(400,
-            { 'Content-Type': 'application/json' },
+            { 'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
             { message: 'Item not exists or download status isn\'t \"TODO\"' },
             callback);
         }
