@@ -56,12 +56,21 @@ functions:
           cors: true
           method: POST
 
-  getFileIndex:
+  find:
     description: Return the index of an file in DynamoDB.
-    handler: methods/getIndex.handler
+    handler: methods/find.handler
     events:
       - http:
           path: /get/{id}
+          cors: true
+          method: GET
+
+  list:
+    description: Return all indexes in DynamoDB.
+    handler: methods/list.handler
+    events:
+      - http:
+          path: /list
           cors: true
           method: GET
 

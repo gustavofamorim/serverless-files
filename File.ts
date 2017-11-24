@@ -36,6 +36,7 @@ export class File extends AbstractController {
 
       var index = {
         name: params.name,
+        originalName: params.originalName,
         type: params.type,
         description: params.description,
         aditional: params.aditional,
@@ -118,7 +119,7 @@ export class File extends AbstractController {
     }
   }
 
-  public getIndex(request, callback){
+  public find(request, callback){
 
     var id = this.getRequestParam(request, 'id');
 
@@ -137,5 +138,15 @@ export class File extends AbstractController {
     else{
       this.defaultInvalidDataResponse(callback);
     }
+  }
+
+  public fetchAll(request, callback){
+    this.dbDriver.all(null, (error, data) => {
+      var response = {
+        itemsRetourned: data.Items.length,
+        data: data.Items
+      }
+      this.defaultResponse(error, response, callback);
+    });
   }
 }

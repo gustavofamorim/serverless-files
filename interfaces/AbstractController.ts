@@ -24,8 +24,12 @@ export abstract class AbstractController {
     if (error) {
         console.error(error);
         this.sendResponse(501,
-          { 'Content-Type': 'application/json' },
-          { message: 'Couldn\'t conclude operation on ' + this.resourceName + ' table.' },
+          { 'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          { statusCode: 501,
+            error: 'Couldn\'t conclude operation on ' + this.resourceName + ' table.'
+          },
           callback);
         return;
     }
@@ -39,8 +43,12 @@ export abstract class AbstractController {
 
   public defaultInvalidDataResponse(callback){
     this.sendResponse(501,
-      { 'Content-Type': 'application/json' },
-      { message: 'Operation blocked: Invalid data received.' },
+      { 'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      { statusCode: 501,
+        error: 'Operation blocked: Invalid data received.'
+      },
       callback);
   }
 
